@@ -1,9 +1,12 @@
 import SwiftUI
+import ServiceManagement
 
 struct ServerListView: View {
     @Bindable var monitor: ServerMonitor
     @Environment(\.colorScheme) private var colorScheme
     @State private var refreshAngle: Double = 0
+    @State private var launchAtLogin = SMAppService.mainApp.status == .enabled
+    @State private var isFooterHovering = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -35,7 +38,7 @@ struct ServerListView: View {
             Spacer()
 
             HStack(spacing: 2) {
-                // Refresh button
+                // Refresh
                 HeaderButton {
                     withAnimation(.linear(duration: 0.5)) {
                         refreshAngle += 360
@@ -48,14 +51,14 @@ struct ServerListView: View {
                 }
                 .keyboardShortcut("r", modifiers: .command)
 
-                // Close button
+                // Quit
                 HeaderButton {
                     NSApplication.shared.terminate(nil)
                 } label: {
                     CloseIcon()
-                        .frame(width: 12, height: 12)
+                        .frame(width: 13, height: 13)
                 }
-                .keyboardShortcut("w", modifiers: .command)
+                .keyboardShortcut("q", modifiers: .command)
             }
         }
         .padding(.vertical, 12)
@@ -95,25 +98,51 @@ struct ServerListView: View {
 
     // MARK: - Footer
 
+    private var footerColor: Color {
+        colorScheme == .dark
+            ? Color(red: 0x98/255, green: 0x98/255, blue: 0x9D/255)
+            : Color(red: 0x86/255, green: 0x86/255, blue: 0x8B/255)
+    }
+
     private var footer: some View {
-        HStack {
-            Text("\(monitor.servers.count) listening")
-                .font(.system(size: 10))
-                .foregroundStyle(.tertiary)
+        HStack(spacing: 6) {
+            HStack(spacing: 6) {
+                Toggle(isOn: $launchAtLogin) {
+                    EmptyView()
+                }
+                .toggleStyle(.switch)
+                .controlSize(.mini)
+                .labelsHidden()
+                .onChange(of: launchAtLogin) { _, newValue in
+                    do {
+                        if newValue {
+                            try SMAppService.mainApp.register()
+                        } else {
+                            try SMAppService.mainApp.unregister()
+                        }
+                    } catch {
+                        launchAtLogin = SMAppService.mainApp.status == .enabled
+                    }
+                }
+
+                if isFooterHovering {
+                    Text("Launch at Login")
+                        .font(.system(size: 10))
+                        .foregroundStyle(footerColor)
+                        .transition(.opacity.combined(with: .offset(x: -4)))
+                }
+            }
+            .onHover { hovering in
+                withAnimation(.easeInOut(duration: 0.35)) {
+                    isFooterHovering = hovering
+                }
+            }
 
             Spacer()
 
-            Button("Quit") {
-                NSApplication.shared.terminate(nil)
-            }
-            .buttonStyle(.plain)
-            .font(.system(size: 10))
-            .foregroundStyle(
-                colorScheme == .dark
-                    ? Color(red: 0x98/255, green: 0x98/255, blue: 0x9D/255)
-                    : Color(red: 0x86/255, green: 0x86/255, blue: 0x8B/255)
-            )
-            .keyboardShortcut("q", modifiers: .command)
+            Text("\(monitor.servers.count) listening")
+                .font(.system(size: 10))
+                .foregroundStyle(.tertiary)
         }
         .padding(.vertical, 8)
         .padding(.horizontal, 14)
@@ -256,8 +285,8 @@ struct CloseIcon: View {
 
     private var iconColor: Color {
         colorScheme == .dark
-            ? Color(red: 0x98/255, green: 0x98/255, blue: 0x9D/255) // #98989D
-            : Color(red: 0x86/255, green: 0x86/255, blue: 0x8B/255) // #86868B
+            ? Color(red: 0x98/255, green: 0x98/255, blue: 0x9D/255)
+            : Color(red: 0x86/255, green: 0x86/255, blue: 0x8B/255)
     }
 
     var body: some View {

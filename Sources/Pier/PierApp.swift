@@ -17,8 +17,8 @@ struct PierApp: App {
     /// Draws the Count-in-Circle menu bar icon.
     /// Uses isTemplate with alpha knockout so macOS handles light/dark automatically.
     static func menuBarIcon(count: Int) -> NSImage {
-        let diameter: CGFloat = 13
-        let padding: CGFloat = 2.5
+        let diameter: CGFloat = 15
+        let padding: CGFloat = 2
         let totalSize = diameter + padding * 2
         let size = NSSize(width: totalSize, height: totalSize)
         let isIdle = count == 0
@@ -41,13 +41,13 @@ struct PierApp: App {
             let fontSize: CGFloat
             if isIdle {
                 text = "\u{2013}" // en-dash
-                fontSize = 9
+                fontSize = 10
             } else if count > 9 {
                 text = "9+"
-                fontSize = 8
+                fontSize = 9
             } else {
                 text = "\(count)"
-                fontSize = 9.5
+                fontSize = 10.5
             }
 
             let font = NSFont.monospacedDigitSystemFont(ofSize: fontSize, weight: .bold)
@@ -73,3 +73,4 @@ struct PierApp: App {
         return image
     }
 }
+

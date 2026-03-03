@@ -64,23 +64,24 @@ struct ServerRowView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
-            // Right column: uptime or actions (instant swap, no animation)
-            if isHovering {
+            // Right column: uptime or actions
+            // ZStack keeps both views in the hierarchy so hover tracking isn't broken
+            ZStack {
+                Text(TimeFormatter.format(server.uptime))
+                    .font(.system(size: 10, design: .monospaced))
+                    .foregroundStyle(.tertiary)
+                    .opacity(isHovering ? 0 : 1)
+
                 HStack(spacing: 3) {
                     KillButton {
-                        // Stage 1: fade row (0.2s easeOut per design system)
                         isKilling = true
-                        // Stage 2: remove after fade completes
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                             onKill()
                         }
                     }
                     OpenButton(action: onOpen)
                 }
-            } else {
-                Text(TimeFormatter.format(server.uptime))
-                    .font(.system(size: 10, design: .monospaced))
-                    .foregroundStyle(.tertiary)
+                .opacity(isHovering ? 1 : 0)
             }
         }
         .padding(.vertical, 10)
@@ -88,6 +89,7 @@ struct ServerRowView: View {
         .background(isHovering ? Color.primary.opacity(0.02) : .clear)
         .opacity(isKilling ? 0.3 : 1.0)
         .scaleEffect(isKilling ? 0.98 : 1.0)
+        .contentShape(Rectangle())
         .animation(.easeOut(duration: 0.15), value: isHovering)
         .animation(.easeOut(duration: 0.2), value: isKilling)
         .onHover { hovering in

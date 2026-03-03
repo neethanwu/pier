@@ -10,7 +10,7 @@ final class ServerMonitor {
     var isScanning = false
 
     private var timer: AnyCancellable?
-    private let scanInterval: TimeInterval = 5
+    private let scanInterval: TimeInterval = 2
 
     init() {
         startPolling()
@@ -34,7 +34,14 @@ final class ServerMonitor {
     }
 
     func kill(server: DevServer) {
-        Foundation.kill(server.pid, SIGTERM)
+        // Try killing the process group first so parent + children all terminate
+        // (handles node/NestJS spawning child listeners). Falls back to single PID.
+        let pgid = getpgid(server.pid)
+        if pgid > 0 {
+            Foundation.kill(-pgid, SIGTERM)
+        } else {
+            Foundation.kill(server.pid, SIGTERM)
+        }
         if let index = servers.firstIndex(where: { $0.id == server.id }) {
             servers.remove(at: index)
         }
