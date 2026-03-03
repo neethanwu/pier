@@ -8,7 +8,7 @@ VERSION = 0.1.0
 # Example: SIGN_IDENTITY = Developer ID Application: Your Org Name (TEAMID)
 SIGN_IDENTITY ?= -
 
-.PHONY: build bundle run release dmg sign notarize regen-icon clean
+.PHONY: build bundle run release dmg sign notarize clean
 
 build:
 	swift build -c release
@@ -45,10 +45,6 @@ release: sign dmg
 run: bundle
 	codesign --force --sign - $(APP_BUNDLE)
 	open $(APP_BUNDLE)
-
-# Regenerate AppIcon.icns from the script (only needed if icon design changes)
-regen-icon:
-	swift Scripts/generate-icon.swift
 
 clean:
 	rm -rf .build $(APP_BUNDLE) $(DMG_NAME)

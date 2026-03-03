@@ -22,7 +22,7 @@ Pier quietly watches for listening TCP ports, resolves them to project names and
 
 ## Install
 
-Download the latest `.dmg` from [Releases](https://github.com/neethan/pier/releases), open it, and drag **Pier.app** to Applications.
+Download the latest `.dmg` from [Releases](https://github.com/neethanwu/pier/releases), open it, and drag **Pier.app** to Applications.
 
 > Pier runs as a menu bar app — look for the circle icon in your menu bar after launching.
 
@@ -52,12 +52,6 @@ export SIGN_IDENTITY="Developer ID Application: Your Name (TEAMID)"
 
 # Build, sign, and create DMG
 make release
-```
-
-### Generate App Icon
-
-```bash
-make icon
 ```
 
 ## How It Works
