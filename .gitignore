@@ -1,0 +1,31 @@
+# Project docs (not part of source)
+pier-one-pager-v2.md
+pier-design-system-v1.html
+docs/
+
+# macOS
+.DS_Store
+*.swp
+*~
+
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+*.xcworkspace/xcuserdata/
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+xcuserdata/
+
+# Swift Package Manager
+.build/
+Package.resolved
+
+# Built app bundle
+Pier.app/
+*.dmg
+
+# Generated icon intermediate files
+SupportFiles/AppIcon.iconset/
