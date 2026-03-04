@@ -14,9 +14,7 @@
   <img src="https://img.shields.io/badge/License-MIT-blue" alt="License: MIT">
 </p>
 
-<p align="center">
-  <video src="https://github.com/neethanwu/pier/raw/main/assets/pier.mp4" width="600" autoplay loop muted playsinline></video>
-</p>
+https://github.com/user-attachments/assets/b5b4df84-7d42-49bc-95a4-e5ca02d68fb0
 
 ## Features
 
