@@ -1,16 +1,22 @@
-<img src="assets/icon.png" width="80" alt="Pier icon">
+<p align="center">
+  <img src="assets/icon.png" width="80" alt="Pier icon">
+</p>
 
-# Pier
+<h1 align="center">Pier</h1>
 
-macOS menu bar app that keeps track of every dev server running on your machine.
+<p align="center">
+  macOS menu bar app that keeps track of every dev server running on your machine.
+</p>
 
-Pier quietly watches for listening TCP ports, resolves them to project names and git branches, and shows everything in a single popover. No setup, no config — just the ports you care about.
+<p align="center">
+  <img src="https://img.shields.io/badge/macOS-14%2B-black" alt="macOS 14+">
+  <img src="https://img.shields.io/badge/Swift-6-F05138" alt="Swift 6">
+  <img src="https://img.shields.io/badge/License-MIT-blue" alt="License: MIT">
+</p>
 
-![macOS 14+](https://img.shields.io/badge/macOS-14%2B-black)
-![Swift 6](https://img.shields.io/badge/Swift-6-F05138)
-![License: MIT](https://img.shields.io/badge/License-MIT-blue)
-
-https://github.com/neethanwu/pier/raw/main/assets/pier.mp4
+<p align="center">
+  <video src="https://github.com/neethanwu/pier/raw/main/assets/pier.mp4" width="600" autoplay loop muted playsinline></video>
+</p>
 
 ## Features
 
