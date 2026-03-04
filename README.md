@@ -1,3 +1,5 @@
+<img src="assets/icon.png" width="80" alt="Pier icon">
+
 # Pier
 
 macOS menu bar app that keeps track of every dev server running on your machine.
@@ -8,7 +10,7 @@ Pier quietly watches for listening TCP ports, resolves them to project names and
 ![Swift 6](https://img.shields.io/badge/Swift-6-F05138)
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue)
 
-<!-- ![Pier screenshot](assets/screenshot.png) -->
+https://github.com/neethanwu/pier/raw/main/assets/pier.mp4
 
 ## Features
 
