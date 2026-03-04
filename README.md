@@ -17,7 +17,8 @@ Pier quietly watches for listening TCP ports, resolves them to project names and
 - **Git branch** — shows the current branch for each project
 - **Kill & Open** — stop a server or open it in your browser on hover
 - **Breathing status dot** — alive indicator for each running server
-- **Keyboard shortcuts** — `⌘R` refresh, `⌘Q` quit, `⌘W` close popover
+- **Launch at Login** — toggle in footer with hover-reveal label
+- **Keyboard shortcuts** — `⌘R` refresh, `⌘Q` quit
 - **Light & dark mode** — follows system appearance
 
 ## Install
@@ -31,7 +32,7 @@ Download the latest `.dmg` from [Releases](https://github.com/neethanwu/pier/rel
 Requires **Xcode 16+** and **macOS 14+**.
 
 ```bash
-git clone https://github.com/neethan/pier.git
+git clone https://github.com/neethanwu/pier.git
 cd pier
 
 # Run locally (ad-hoc signed)
@@ -56,7 +57,7 @@ make release
 
 ## How It Works
 
-Pier uses `lsof` to detect listening TCP ports, then resolves each to a process → working directory → project name → git branch. It polls every 5 seconds and uses no background daemons or privileged helpers.
+Pier uses `lsof` to detect listening TCP ports, then resolves each to a process → working directory → project name → git branch. It polls every 2 seconds and uses no background daemons or privileged helpers.
 
 **Detected servers:** node, next, vite, nuxt, ruby, rails, puma, python, uvicorn, flask, django, go, cargo, deno, bun, php, java, and more.
 
@@ -82,7 +83,7 @@ Sources/Pier/
 
 ## Credits
 
-Inspired by [Porter](https://x.com/nicklawrenn/status/1893316289581646158) by [@eduardwieandt](https://x.com/eduardwieandt).
+Inspired by [Porter](https://x.com/eduardwieandt/status/2027495344766947415) by [@eduardwieandt](https://x.com/eduardwieandt).
 
 ## License
 

@@ -27,10 +27,17 @@ sign: bundle
 
 dmg: sign
 	rm -f $(DMG_NAME)
-	hdiutil create -volname "$(APP_NAME)" \
-		-srcfolder $(APP_BUNDLE) \
-		-ov -format UDZO \
-		$(DMG_NAME)
+	create-dmg \
+		--volname "$(APP_NAME)" \
+		--window-pos 200 120 \
+		--window-size 480 300 \
+		--icon-size 256 \
+		--icon "$(APP_BUNDLE)" 120 130 \
+		--app-drop-link 360 130 \
+		--hide-extension "$(APP_BUNDLE)" \
+		--no-internet-enable \
+		$(DMG_NAME) \
+		$(APP_BUNDLE) || true
 	codesign --force --sign "$(SIGN_IDENTITY)" $(DMG_NAME)
 	@echo "Created $(DMG_NAME)"
 
