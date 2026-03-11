@@ -43,10 +43,11 @@ dmg: sign
 
 notarize: dmg
 	xcrun notarytool submit $(DMG_NAME) --keychain-profile "pier-notarize" --wait
+	xcrun stapler staple $(APP_BUNDLE)
 	xcrun stapler staple $(DMG_NAME)
-	@echo "Notarized and stapled $(DMG_NAME)"
+	@echo "Notarized and stapled $(APP_BUNDLE) and $(DMG_NAME)"
 
-release: sign dmg
+release: notarize
 	@echo "Release build complete: $(DMG_NAME)"
 
 run: bundle
