@@ -19,6 +19,9 @@ DerivedData/
 *.perspectivev3
 xcuserdata/
 
+# Local config
+.env
+
 # Swift Package Manager
 .build/
 Package.resolved

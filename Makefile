@@ -6,6 +6,7 @@ VERSION = 0.1.0
 
 # Set your Developer ID identity (find yours with: security find-identity -v -p codesigning)
 # Example: SIGN_IDENTITY = Developer ID Application: Your Org Name (TEAMID)
+-include .env
 SIGN_IDENTITY ?= -
 
 .PHONY: build bundle run release dmg sign notarize clean
